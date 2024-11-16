@@ -8,14 +8,14 @@
 <h3>Obtener todas las marcas</h3> 
 Método: GET
 
-URL: http://localhost/API/public/index.php/marcas
+URL: http://localhost/TiendaRopa/API/public/index.php/marcas
 
 <hr>
 
 <h3>Crear una nueva marca</h3> 
 Método: POST
 
-URL: http://localhost/API/public/index.php/marcas
+URL: http://localhost/TiendaRopa/API/public/index.php/marcas
 
 {
   "nombre": "NuevaMarca"
@@ -25,38 +25,32 @@ URL: http://localhost/API/public/index.php/marcas
 <h3>Actualizar una marca</h3> 
 Método: PUT
 
-URL: http://localhost/API/public/index.php/marcas
+URL: http://localhost/TiendaRopa/API/public/index.php/marcas
 
-json
 {
   "id": 1,
   "nombre": "MarcaActualizada"
 }
 <hr>
 
-<h3>Eliminar una marca</h3> 
-Método: DELETE
+<h3>Eliminar una marca</h3> Método: DELETE
 
-URL: http://localhost/API/public/index.php/marcas
+URL: http://localhost/TiendaRopa/API/public/index.php/marcas 
 
 {
   "id": 1
 }
 <hr>
 
+<h3>Obtener todas las prendas</h3> Método: GET
 
-<h3>Obtener todas las prendas</h3> 
-Método: GET
-
-URL: http://localhost/API/public/index.php/prendas
+URL: http://localhost/TiendaRopa/API/public/index.php/prendas
 
 <hr>
 
-<h3>Crear una nueva prenda</h3> 
-Método: POST
+<h3>Crear una nueva prenda</h3> Método: POST
 
-URL: http://localhost/API/public/index.php/prendas
-
+URL: http://localhost/TiendaRopa/API/public/index.php/prendas
 
 {
   "nombre": "NuevaPrenda",
@@ -66,17 +60,15 @@ URL: http://localhost/API/public/index.php/prendas
 }
 <hr>
 
-<h3>Obtener todas las ventas</h3> 
-Método: GET
+<h3>Obtener todas las ventas</h3> Método: GET
 
-URL: http://localhost/API/public/index.php/ventas
+URL: http://localhost/TiendaRopa/API/public/index.php/ventas
 
 <hr>
 
-<h3>Crear una nueva venta</h3> 
-Método: POST
+<h3>Crear una nueva venta</h3> Método: POST
 
-URL: http://localhost/API/public/index.php/ventas
+URL: http://localhost/TiendaRopa/API/public/index.php/ventas
 
 {
   "prenda_id": 1,
