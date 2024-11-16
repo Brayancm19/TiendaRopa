@@ -5,25 +5,52 @@
 <img src="Diagrama.png" alt="Logo" class="logo">
 
 <hr>
-<h3>Actualizar una marca</h3>
-Método: PUT
-URL: http://localhost/TiendaRopa/API/public/index.php/marcas
+<h3>Obtener todas las marcas</h3> 
+Método: GET
+
+URL: http://localhost/API/public/index.php/marcas
+
+<hr>
+
+<h3>Crear una nueva marca</h3> 
+Método: POST
+
+URL: http://localhost/API/public/index.php/marcas
 
 Body:
+
+Selecciona raw y JSON y introduce lo siguiente:
+
+json
+{
+  "nombre": "NuevaMarca"
+}
+<hr>
+
+<h3>Actualizar una marca</h3> 
+Método: PUT
+
+URL: http://localhost/API/public/index.php/marcas
+
+Body:
+
+Selecciona raw y JSON y introduce lo siguiente:
 
 json
 {
   "id": 1,
-  "nombre": "NombreActualizado"
+  "nombre": "MarcaActualizada"
 }
 <hr>
 
-<h3>Eliminar una marca</h3>
+<h3>Eliminar una marca</h3> 
 Método: DELETE
 
-URL: http://localhost/TiendaRopa/API/public/index.php/marcas
+URL: http://localhost/API/public/index.php/marcas
 
 Body:
+
+Selecciona raw y JSON y introduce lo siguiente:
 
 json
 {
@@ -31,91 +58,51 @@ json
 }
 <hr>
 
-<h3>Crear una nueva prenda</h3>
+
+<h3>Obtener todas las prendas</h3> 
+Método: GET
+
+URL: http://localhost/API/public/index.php/prendas
+
+<hr>
+
+<h3>Crear una nueva prenda</h3> 
 Método: POST
 
-URL: http://localhost/TiendaRopa/API/public/index.php/prendas
+URL: http://localhost/API/public/index.php/prendas
 
 Body:
 
+Selecciona raw y JSON y introduce lo siguiente:
+
 json
 {
-  "nombre": "NombreDePrenda",
+  "nombre": "NuevaPrenda",
   "talla": "M",
-  "cantidad_stock": 50,
+  "cantidad_stock": 100,
   "marca_id": 1
 }
 <hr>
 
-<h3>Actualizar una prenda</h3>
-Método: PUT
+<h3>Obtener todas las ventas</h3> 
+Método: GET
 
-URL: http://localhost/TiendaRopa/API/public/index.php/prendas
+URL: http://localhost/API/public/index.php/ventas
 
-Body:
-
-json
-{
-  "id": 1,
-  "nombre": "NombreActualizado",
-  "talla": "L",
-  "cantidad_stock": 60,
-  "marca_id": 2
-}
 <hr>
 
-<h3>Eliminar una prenda</h3>
-Método: DELETE
-
-URL: http://localhost/TiendaRopa/API/public/index.php/prendas
-
-Body:
-
-json
-{
-  "id": 1
-}
-<hr>
-
-<h3>Crear una nueva venta</h3>
+<h3>Crear una nueva venta</h3> 
 Método: POST
 
-URL: http://localhost/TiendaRopa/API/public/index.php/ventas
+URL: http://localhost/API/public/index.php/ventas
 
 Body:
+
+Selecciona raw y JSON y introduce lo siguiente:
 
 json
 {
   "prenda_id": 1,
   "cantidad": 10,
   "fecha": "2024-10-01"
-}
-<hr>
-
-<h3>Actualizar una venta</h3>
-Método: PUT
-
-URL: http://localhost/TiendaRopa/API/public/index.php/ventas
-
-Body:
-
-json
-{
-  "id": 1,
-  "prenda_id": 1,
-  "cantidad": 5,
-  "fecha": "2024-10-02"
-}
-<hr>
-
-<h3>Eliminar una venta</h3>
-Método: DELETE
-
-URL: http://localhost/TiendaRopa/API/public/index.php/ventas
-
-Body:
-
-json
-{
-  "id": 1
 }

@@ -1,68 +1,65 @@
 <?php
-// src/models/Marca.php
-require_once 'src/DB/Database.php';
-
 class Marca {
+    private $conn;
+    private $table_name = "marcas";
 
-    private $id;
-    private $nombre;
+    public $id;
+    public $nombre;
 
-    public function __construct($id, $nombre = null) {
-        $this->id = $id;
-        $this->nombre = $nombre;
+    public function __construct($db) {
+        $this->conn = $db;
     }
 
     // Obtener todas las marcas
-    public static function getAll() {
-        $conn = Database::getConnection();
-        $sql = "SELECT * FROM marcas";
-        $result = $conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+    public function getMarcas() {
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Crear una nueva marca
     public function create() {
-        $conn = Database::getConnection();
-        $sql = "INSERT INTO marcas (nombre) VALUES ('$this->nombre')";
-        return $conn->query($sql);
+        $query = "INSERT INTO " . $this->table_name . " SET nombre=:nombre";
+        $stmt = $this->conn->prepare($query);
+
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $stmt->bindParam(":nombre", $this->nombre);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 
-    // Actualizar una marca existente
+    // Actualizar una marca
     public function update() {
-        $conn = Database::getConnection();
-        $sql = "UPDATE marcas SET nombre = '$this->nombre' WHERE id = $this->id";
-        return $conn->query($sql);
+        $query = "UPDATE " . $this->table_name . " SET nombre=:nombre WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 
     // Eliminar una marca
     public function delete() {
-        $conn = Database::getConnection();
-        $sql = "DELETE FROM marcas WHERE id = $this->id";
-        return $conn->query($sql);
-    }
+        $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
 
-    // Obtener marcas con al menos una venta
-    public static function getMarcasConVentas() {
-        $conn = Database::getConnection();
-        $sql = "SELECT DISTINCT marcas.nombre 
-                FROM marcas
-                JOIN prendas ON marcas.id = prendas.marca_id
-                JOIN ventas ON prendas.id = ventas.prenda_id";
-        $result = $conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(":id", $this->id);
 
-    // Obtener las 5 marcas más vendidas
-    public static function getTop5Marcas() {
-        $conn = Database::getConnection();
-        $sql = "SELECT marcas.nombre, SUM(ventas.cantidad) AS total_ventas 
-                FROM marcas
-                JOIN prendas ON marcas.id = prendas.marca_id
-                JOIN ventas ON prendas.id = ventas.prenda_id
-                GROUP BY marcas.id
-                ORDER BY total_ventas DESC LIMIT 5";
-        $result = $conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 ?>

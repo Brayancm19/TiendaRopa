@@ -1,32 +1,82 @@
 <?php
-// src/models/Prenda.php
-require_once 'src/DB/Database.php';
-
 class Prenda {
+    private $conn;
+    private $table_name = "prendas";
 
-    private $id;
-    private $nombre;
-    private $talla;
-    private $cantidad_stock;
-    private $marca_id;
+    public $id;
+    public $nombre;
+    public $talla;
+    public $cantidad_stock;
+    public $marca_id;
 
-    public function __construct($id, $nombre = null, $talla = null, $cantidad_stock = null, $marca_id = null) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->talla = $talla;
-        $this->cantidad_stock = $cantidad_stock;
-        $this->marca_id = $marca_id;
+    public function __construct($db) {
+        $this->conn = $db;
     }
 
-    // Obtener prendas vendidas y cantidad restante en stock
-    public static function getPrendasVendidas() {
-        $conn = Database::getConnection();
-        $sql = "SELECT prendas.nombre, SUM(ventas.cantidad) AS cantidad_vendida, prendas.cantidad_stock 
-                FROM prendas
-                JOIN ventas ON prendas.id = ventas.prenda_id
-                GROUP BY prendas.id";
-        $result = $conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+    // Obtener todas las prendas
+    public function getPrendas() {
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Crear una nueva prenda
+    public function create() {
+        $query = "INSERT INTO " . $this->table_name . " SET nombre=:nombre, talla=:talla, cantidad_stock=:cantidad_stock, marca_id=:marca_id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->talla = htmlspecialchars(strip_tags($this->talla));
+        $this->cantidad_stock = htmlspecialchars(strip_tags($this->cantidad_stock));
+        $this->marca_id = htmlspecialchars(strip_tags($this->marca_id));
+
+        $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":talla", $this->talla);
+        $stmt->bindParam(":cantidad_stock", $this->cantidad_stock);
+        $stmt->bindParam(":marca_id", $this->marca_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Actualizar una prenda
+    public function update() {
+        $query = "UPDATE " . $this->table_name . " SET nombre=:nombre, talla=:talla, cantidad_stock=:cantidad_stock, marca_id=:marca_id WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->talla = htmlspecialchars(strip_tags($this->talla));
+        $this->cantidad_stock = htmlspecialchars(strip_tags($this->cantidad_stock));
+        $this->marca_id = htmlspecialchars(strip_tags($this->marca_id));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":talla", $this->talla);
+        $stmt->bindParam(":cantidad_stock", $this->cantidad_stock);
+        $stmt->bindParam(":marca_id", $this->marca_id);
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Eliminar una prenda
+    public function delete() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 ?>
