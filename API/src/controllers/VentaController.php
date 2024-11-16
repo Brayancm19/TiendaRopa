@@ -21,36 +21,59 @@ class VentaController {
     // Crear una nueva venta
     public function createVenta() {
         $data = json_decode(file_get_contents("php://input"));
-        $this->venta->prenda_id = $data->prenda_id;
-        $this->venta->cantidad = $data->cantidad;
-        $this->venta->fecha = $data->fecha;
 
-        if ($this->venta->create()) {
-            echo json_encode(["message" => "Venta creada."]);
+        if ($data === null) {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(["message" => "No se pudo interpretar el cuerpo de la solicitud."]);
+            return;
+        }
+
+        if (isset($data->prenda_id, $data->cantidad, $data->fecha)) {
+            $this->venta->prenda_id = $data->prenda_id;
+            $this->venta->cantidad = $data->cantidad;
+            $this->venta->fecha = $data->fecha;
+
+            if ($this->venta->create()) {
+                echo json_encode(["message" => "Venta creada."]);
+            } else {
+                echo json_encode(["message" => "No se pudo crear la venta."]);
+            }
         } else {
-            echo json_encode(["message" => "No se pudo crear la venta."]);
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(["message" => "Datos inválidos. Asegúrate de que los campos 'prenda_id', 'cantidad' y 'fecha' están presentes."]);
         }
     }
 
     // Actualizar una venta
-    public function updateVenta() {
+    public function updateVenta($id) {
         $data = json_decode(file_get_contents("php://input"));
-        $this->venta->id = $data->id;
-        $this->venta->prenda_id = $data->prenda_id;
-        $this->venta->cantidad = $data->cantidad;
-        $this->venta->fecha = $data->fecha;
 
-        if ($this->venta->update()) {
-            echo json_encode(["message" => "Venta actualizada."]);
+        if ($data === null) {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(["message" => "No se pudo interpretar el cuerpo de la solicitud."]);
+            return;
+        }
+
+        if (isset($data->prenda_id, $data->cantidad, $data->fecha)) {
+            $this->venta->id = $id;
+            $this->venta->prenda_id = $data->prenda_id;
+            $this->venta->cantidad = $data->cantidad;
+            $this->venta->fecha = $data->fecha;
+
+            if ($this->venta->update()) {
+                echo json_encode(["message" => "Venta actualizada."]);
+            } else {
+                echo json_encode(["message" => "No se pudo actualizar la venta."]);
+            }
         } else {
-            echo json_encode(["message" => "No se pudo actualizar la venta."]);
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(["message" => "Datos inválidos. Asegúrate de que los campos 'prenda_id', 'cantidad' y 'fecha' están presentes."]);
         }
     }
 
     // Eliminar una venta
-    public function deleteVenta() {
-        $data = json_decode(file_get_contents("php://input"));
-        $this->venta->id = $data->id;
+    public function deleteVenta($id) {
+        $this->venta->id = $id;
 
         if ($this->venta->delete()) {
             echo json_encode(["message" => "Venta eliminada."]);

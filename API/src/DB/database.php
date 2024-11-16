@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "tiendaropa";  // Nombre de la base de datos
-    private $username = "root";       // Usuario de la base de datos
-    private $password = "";           // Contraseña de la base de datos (dejar vacía si no hay)
+    private $db_name = "tiendaropa"; 
+    private $username = "root";       
+    private $password = "";        
     public $conn;
 
     // Obtener la conexión a la base de datos

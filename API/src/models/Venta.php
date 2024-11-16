@@ -25,17 +25,23 @@ class Venta {
         $query = "INSERT INTO " . $this->table_name . " SET prenda_id=:prenda_id, cantidad=:cantidad, fecha=:fecha";
         $stmt = $this->conn->prepare($query);
 
+        // Sanitizar la entrada
         $this->prenda_id = htmlspecialchars(strip_tags($this->prenda_id));
         $this->cantidad = htmlspecialchars(strip_tags($this->cantidad));
         $this->fecha = htmlspecialchars(strip_tags($this->fecha));
 
+        // Enlazar parámetros
         $stmt->bindParam(":prenda_id", $this->prenda_id);
         $stmt->bindParam(":cantidad", $this->cantidad);
         $stmt->bindParam(":fecha", $this->fecha);
 
+        // Ejecutar la consulta
         if ($stmt->execute()) {
             return true;
         }
+
+        // Manejo de errores
+        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 
@@ -44,19 +50,25 @@ class Venta {
         $query = "UPDATE " . $this->table_name . " SET prenda_id=:prenda_id, cantidad=:cantidad, fecha=:fecha WHERE id=:id";
         $stmt = $this->conn->prepare($query);
 
+        // Sanitizar la entrada
         $this->prenda_id = htmlspecialchars(strip_tags($this->prenda_id));
         $this->cantidad = htmlspecialchars(strip_tags($this->cantidad));
         $this->fecha = htmlspecialchars(strip_tags($this->fecha));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
+        // Enlazar parámetros
         $stmt->bindParam(":prenda_id", $this->prenda_id);
         $stmt->bindParam(":cantidad", $this->cantidad);
         $stmt->bindParam(":fecha", $this->fecha);
         $stmt->bindParam(":id", $this->id);
 
+        // Ejecutar la consulta
         if ($stmt->execute()) {
             return true;
         }
+
+        // Manejo de errores
+        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 
@@ -65,12 +77,17 @@ class Venta {
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
 
+        // Sanitizar la entrada
         $this->id = htmlspecialchars(strip_tags($this->id));
         $stmt->bindParam(":id", $this->id);
 
+        // Ejecutar la consulta
         if ($stmt->execute()) {
             return true;
         }
+
+        // Manejo de errores
+        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 }

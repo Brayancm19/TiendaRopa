@@ -20,23 +20,17 @@ class MarcaController {
 
     // Crear una nueva marca
     public function createMarca() {
-        // Captura de datos JSON
-        $data = file_get_contents("php://input");
-        $json_data = json_decode($data, true);  // Decodificar a array asociativo
+        $data = json_decode(file_get_contents("php://input"));
 
         // Verificación adicional para depuración
-        if ($json_data === null) {
+        if ($data === null) {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode([
-                "message" => "No se pudo interpretar el cuerpo de la solicitud.",
-                "raw_data" => $data,
-                "error" => json_last_error_msg()
-            ]);
+            echo json_encode(["message" => "No se pudo interpretar el cuerpo de la solicitud."]);
             return;
         }
 
-        if (isset($json_data['nombre'])) {
-            $this->marca->nombre = $json_data['nombre'];
+        if (property_exists($data, 'nombre')) {
+            $this->marca->nombre = $data->nombre;
 
             if ($this->marca->create()) {
                 echo json_encode(["message" => "Marca creada."]);
@@ -50,23 +44,18 @@ class MarcaController {
     }
 
     // Actualizar una marca
-    public function updateMarca() {
-        $data = file_get_contents("php://input");
-        $json_data = json_decode($data, true);
+    public function updateMarca($id) {
+        $data = json_decode(file_get_contents("php://input"));
 
-        if ($json_data === null) {
+        if ($data === null) {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode([
-                "message" => "No se pudo interpretar el cuerpo de la solicitud.",
-                "raw_data" => $data,
-                "error" => json_last_error_msg()
-            ]);
+            echo json_encode(["message" => "No se pudo interpretar el cuerpo de la solicitud."]);
             return;
         }
 
-        if (isset($json_data['id']) && isset($json_data['nombre'])) {
-            $this->marca->id = $json_data['id'];
-            $this->marca->nombre = $json_data['nombre'];
+        if (property_exists($data, 'nombre')) {
+            $this->marca->id = $id;
+            $this->marca->nombre = $data->nombre;
 
             if ($this->marca->update()) {
                 echo json_encode(["message" => "Marca actualizada."]);
@@ -75,36 +64,18 @@ class MarcaController {
             }
         } else {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode(["message" => "Datos inválidos. Asegúrate de que los campos 'id' y 'nombre' están presentes."]);
+            echo json_encode(["message" => "Datos inválidos. Asegúrate de que el campo 'nombre' está presente."]);
         }
     }
 
     // Eliminar una marca
-    public function deleteMarca() {
-        $data = file_get_contents("php://input");
-        $json_data = json_decode($data, true);
+    public function deleteMarca($id) {
+        $this->marca->id = $id;
 
-        if ($json_data === null) {
-            header("HTTP/1.1 400 Bad Request");
-            echo json_encode([
-                "message" => "No se pudo interpretar el cuerpo de la solicitud.",
-                "raw_data" => $data,
-                "error" => json_last_error_msg()
-            ]);
-            return;
-        }
-
-        if (isset($json_data['id'])) {
-            $this->marca->id = $json_data['id'];
-
-            if ($this->marca->delete()) {
-                echo json_encode(["message" => "Marca eliminada."]);
-            } else {
-                echo json_encode(["message" => "No se pudo eliminar la marca."]);
-            }
+        if ($this->marca->delete()) {
+            echo json_encode(["message" => "Marca eliminada."]);
         } else {
-            header("HTTP/1.1 400 Bad Request");
-            echo json_encode(["message" => "Datos inválidos. Asegúrate de que el campo 'id' está presente."]);
+            echo json_encode(["message" => "No se pudo eliminar la marca."]);
         }
     }
 }
