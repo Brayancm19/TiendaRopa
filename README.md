@@ -33,7 +33,8 @@ URL: http://localhost/TiendaRopa/API/public/index.php/marcas
 }
 <hr>
 
-<h3>Eliminar una marca</h3> Método: DELETE
+<h3>Eliminar una marca</h3>
+Método: DELETE
 
 URL: http://localhost/TiendaRopa/API/public/index.php/marcas 
 
@@ -42,13 +43,15 @@ URL: http://localhost/TiendaRopa/API/public/index.php/marcas
 }
 <hr>
 
-<h3>Obtener todas las prendas</h3> Método: GET
+<h3>Obtener todas las prendas</h3> 
+Método: GET
 
 URL: http://localhost/TiendaRopa/API/public/index.php/prendas
 
 <hr>
 
-<h3>Crear una nueva prenda</h3> Método: POST
+<h3>Crear una nueva prenda</h3> 
+Método: POST
 
 URL: http://localhost/TiendaRopa/API/public/index.php/prendas
 
@@ -60,13 +63,15 @@ URL: http://localhost/TiendaRopa/API/public/index.php/prendas
 }
 <hr>
 
-<h3>Obtener todas las ventas</h3> Método: GET
+<h3>Obtener todas las ventas</h3> 
+Método: GET
 
 URL: http://localhost/TiendaRopa/API/public/index.php/ventas
 
 <hr>
 
-<h3>Crear una nueva venta</h3> Método: POST
+<h3>Crear una nueva venta</h3> 
+Método: POST
 
 URL: http://localhost/TiendaRopa/API/public/index.php/ventas
 
