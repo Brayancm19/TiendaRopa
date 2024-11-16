@@ -4,13 +4,11 @@
 
 <img src="Diagrama.png" alt="Logo" class="logo">
 
+<hr>
 Actualizar una marca
 Método: PUT
-
 URL: http://localhost/API/public/index.php/marcas
-
 Body:
-
 json
 {
   "id": 1,
