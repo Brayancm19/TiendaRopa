@@ -3,3 +3,16 @@
 <h2>Brayan Josué Chacón Molina</h2>
 
 <img src="Diagrama.png" alt="Logo" class="logo">
+
+Actualizar una marca
+Método: PUT
+
+URL: http://localhost/API/public/index.php/marcas
+
+Body:
+
+json
+{
+  "id": 1,
+  "nombre": "NombreActualizado"
+}
