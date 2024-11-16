@@ -17,11 +17,6 @@ Método: POST
 
 URL: http://localhost/API/public/index.php/marcas
 
-Body:
-
-Selecciona raw y JSON y introduce lo siguiente:
-
-json
 {
   "nombre": "NuevaMarca"
 }
@@ -31,10 +26,6 @@ json
 Método: PUT
 
 URL: http://localhost/API/public/index.php/marcas
-
-Body:
-
-Selecciona raw y JSON y introduce lo siguiente:
 
 json
 {
@@ -48,11 +39,6 @@ Método: DELETE
 
 URL: http://localhost/API/public/index.php/marcas
 
-Body:
-
-Selecciona raw y JSON y introduce lo siguiente:
-
-json
 {
   "id": 1
 }
@@ -71,11 +57,7 @@ Método: POST
 
 URL: http://localhost/API/public/index.php/prendas
 
-Body:
 
-Selecciona raw y JSON y introduce lo siguiente:
-
-json
 {
   "nombre": "NuevaPrenda",
   "talla": "M",
@@ -96,11 +78,6 @@ Método: POST
 
 URL: http://localhost/API/public/index.php/ventas
 
-Body:
-
-Selecciona raw y JSON y introduce lo siguiente:
-
-json
 {
   "prenda_id": 1,
   "cantidad": 10,
