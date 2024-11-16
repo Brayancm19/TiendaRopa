@@ -8,7 +8,9 @@
 Actualizar una marca
 Método: PUT
 URL: http://localhost/API/public/index.php/marcas
+
 Body:
+
 json
 {
   "id": 1,
