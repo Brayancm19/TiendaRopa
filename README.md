@@ -1,4 +1,5 @@
-# Tienda Ropa
-![TiendaRopa](https://github.com/user-attachments/assets/45fb21b0-aa67-4e68-9e81-692beb6ae143)
+<h1>Proyecto 2</h1>
+<h2>Curso: Desarrollo con Plataformas abiertas</h2> 
+<h2>Brayan Josué Chacón Molina</h2>
 
-Base de datos para una tienda de ropa
+ <img src="Diagrama.pngjpg" alt="Logo" class="logo">
