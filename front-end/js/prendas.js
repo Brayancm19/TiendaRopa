@@ -87,13 +87,17 @@ $(document).ready(function() {
         if (confirm('¿Estás seguro de que deseas eliminar esta prenda?')) {
             const data = { id: id };
             ajaxRequest('DELETE', 'php/prendas.php', data, function(response) {
-                const res = JSON.parse(response);
-                console.log('Respuesta del servidor:', response);
-                if (res.status === 1) {
-                    showAlert('Prenda eliminada exitosamente', 'success');
-                    loadPrendas();
-                } else {
-                    showAlert('Error: ' + res.status_message, 'danger');
+                try {
+                    const res = JSON.parse(response);
+                    console.log('Respuesta del servidor:', response);
+                    if (res.status === 1) {
+                        showAlert('Prenda eliminada exitosamente', 'success');
+                        loadPrendas();
+                    } else {
+                        showAlert('Error: ' + res.status_message, 'danger');
+                    }
+                } catch (e) {
+                    showAlert('Error al procesar la respuesta del servidor.', 'danger');
                 }
             }, function(error) {
                 showAlert('Error al eliminar la prenda', 'danger');
@@ -143,7 +147,10 @@ $(document).ready(function() {
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: successCallback,
-            error: errorCallback
+            error: function(xhr, status, error) {
+                const errorMessage = `Error: ${status} - ${error}`;
+                showAlert(errorMessage, 'danger');
+            }
         });
     }
 

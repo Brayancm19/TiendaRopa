@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // Crear una nueva venta
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $prenda_id = $_POST['prenda_id'];
-    $cantidad = $_POST['cantidad'];
-    $fecha = $_POST['fecha'];
+    $data = json_decode(file_get_contents('php://input'), true);
+    $prenda_id = $data['prenda_id'];
+    $cantidad = $data['cantidad'];
+    $fecha = $data['fecha'];
 
     $data = array(
         "prenda_id" => $prenda_id,
@@ -27,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Actualizar una venta
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    parse_str(file_get_contents("php://input"), $_PUT);
-    $id = $_PUT['id'];
-    $prenda_id = $_PUT['prenda_id'];
-    $cantidad = $_PUT['cantidad'];
-    $fecha = $_PUT['fecha'];
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id = $data['id'];
+    $prenda_id = $data['prenda_id'];
+    $cantidad = $data['cantidad'];
+    $fecha = $data['fecha'];
 
     $data = array(
         "id" => $id,
@@ -46,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 // Eliminar una venta
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    parse_str(file_get_contents("php://input"), $_DELETE);
-    $id = $_DELETE['id'];
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id = $data['id'];
 
     $url = "http://localhost/TiendaRopa/API/public/index.php/ventas?id=$id";
     $response = callAPI('DELETE', $url, false);

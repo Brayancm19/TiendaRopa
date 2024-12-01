@@ -28,6 +28,7 @@ switch($request_method) {
         break;
     default:
         header("HTTP/1.1 405 Method Not Allowed");
+        echo json_encode(array('status' => 0, 'status_message' => 'Método no permitido'));
         break;
 }
 
