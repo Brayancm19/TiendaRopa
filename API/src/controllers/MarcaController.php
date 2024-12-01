@@ -22,7 +22,6 @@ class MarcaController {
     public function createMarca() {
         $data = json_decode(file_get_contents("php://input"));
 
-
         if ($data === null) {
             header("HTTP/1.1 400 Bad Request");
             echo json_encode(["message" => "No se pudo interpretar el cuerpo de la solicitud."]);
