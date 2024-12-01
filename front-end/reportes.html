@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Tienda de Ropa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="prendas.html">Prendas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="marcas.html">Marcas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ventas.html">Ventas</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="reportes.html">Reportes</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container mt-5">
+        <h1>Reportes</h1>
+
+        <!-- Reporte: Listado de Marcas con Ventas -->
+        <h3>Marcas con Ventas</h3>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Nombre de la Marca</th>
+                </tr>
+            </thead>
+            <tbody id="marcasConVentasTableBody">
+                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Reporte: Prendas Vendidas -->
+        <h3>Prendas Vendidas</h3>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Nombre de la Prenda</th>
+                    <th>Cantidad Vendida</th>
+                    <th>Cantidad en Stock</th>
+                </tr>
+            </thead>
+            <tbody id="prendasVendidasTableBody">
+                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Reporte: Top 5 Marcas Más Vendidas -->
+        <h3>Top 5 Marcas Más Vendidas</h3>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Nombre de la Marca</th>
+                    <th>Total Ventas</th>
+                </tr>
+            </thead>
+            <tbody id="top5MarcasTableBody">
+                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/reportes.js"></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ $query = [];
 parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $query);
 
 // Ajustar la URI para que coincida con la estructura correcta
-$uri = str_replace('/TiendaRopa/API/public/index.php', '', $uri);
+$uri = str_replace(['/TiendaRopa/API/public/index.php', '/TiendaRopa/API/public'], '', $uri);
 
 // Rutas para el controlador Marca
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $uri === '/marcas') {
@@ -47,6 +47,18 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && $uri === '/ventas') {
     $ventaController->updateVenta($query['id']);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $uri === '/ventas' && isset($query['id'])) {
     $ventaController->deleteVenta($query['id']);
+}
+
+// Rutas para los reportes
+elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && $uri === '/marcasConVentas') {
+    require_once 'reportes.php';
+    echo getMarcasConVentas($conn);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && $uri === '/prendasVendidas') {
+    require_once 'reportes.php';
+    echo getPrendasVendidas($conn);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && $uri === '/top5Marcas') {
+    require_once 'reportes.php';
+    echo getTop5Marcas($conn);
 }
 
 // Ruta no encontrada

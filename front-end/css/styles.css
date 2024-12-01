@@ -1,0 +1,52 @@
+/* Estilos generales */
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+/* Estilos para la barra de navegación */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem;
+}
+
+/* Estilos para las tablas */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* Estilos para los formularios */
+#formTitle {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+#cancelButton {
+    margin-left: 10px;
+}
+
+/* Estilos para las alertas */
+.alert {
+    margin-top: 20px;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+}
